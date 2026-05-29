@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini MC - Server Rules</title>
+
+<style>
+body {
+    margin: 0;
+    background: url('https://cdn.discordapp.com/attachments/1502245812669911123/1508812167615348858/InShot_20260526_180708071.gif?ex=6a1a3215&is=6a18e095&hm=d4f05629cb9cb7b670d62cc50146926157193a37ccf8d970b077d56958231cfc&') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    padding: 5px;
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 0 8px orange;
+    transition: 0.3s;
+}
+
+.menu-icon:hover span {
+    background-color: orange;
+    box-shadow: 0 0 12px red;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    background-color: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(10px);
+    border-right: 2px solid orange;
+    overflow-x: hidden;
+    transition: 0.4s ease;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.7);
+}
+
+/* SIDEBAR HEADER FOR RULES */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 15px;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.2);
+    gap: 10px;
+}
+
+.sidebar-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px orange;
+}
+
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    flex-grow: 1;
+    animation: sidebarRgb 6s infinite linear;
+    white-space: nowrap;
+}
+
+.sidebar .close-btn {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    line-height: 1;
+}
+
+.sidebar .close-btn:hover {
+    color: red;
+}
+
+.sidebar a.menu-link {
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #ccc;
+    display: block;
+    transition: 0.3s;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 165, 0, 0.1);
+    text-align: left;
+}
+
+.sidebar a.menu-link:hover {
+    color: orange;
+    padding-left: 40px;
+    background: rgba(255, 165, 0, 0.05);
+    text-shadow: 0 0 10px orange;
+}
+
+.rules-container {
+    max-width: 800px;
+    margin: 60px auto 40px auto;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px orange;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+    text-align: left;
+}
+
+.rules-title {
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    animation: rgbGlow 6s infinite linear;
+}
+
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list li {
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 10px 15px;
+    border-left: 4px solid orange;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0 8px 8px 0;
+    animation: rgbGlow 8s infinite linear;
+}
+
+@keyframes rgbGlow {
+    0% { color: #ff3333; text-shadow: 0 0 10px #ff3333; border-color: #ff3333; }
+    20% { color: #ff9933; text-shadow: 0 0 10px #ff9933; border-color: #ff9933; }
+    40% { color: #33ff33; text-shadow: 0 0 10px #33ff33; border-color: #33ff33; }
+    60% { color: #33ffff; text-shadow: 0 0 10px #33ffff; border-color: #33ffff; }
+    80% { color: #3333ff; text-shadow: 0 0 10px #3333ff; border-color: #3333ff; }
+    100% { color: #ff33ff; text-shadow: 0 0 10px #ff33ff; border-color: #ff33ff; }
+}
+
+@keyframes sidebarRgb {
+    0% { color: #ff3333; text-shadow: 0 0 8px #ff3333; }
+    20% { color: #ff9933; text-shadow: 0 0 8px #ff9933; }
+    40% { color: #33ff33; text-shadow: 0 0 8px #33ff33; }
+    60% { color: #33ffff; text-shadow: 0 0 8px #33ffff; }
+    80% { color: #3333ff; text-shadow: 0 0 8px #3333ff; }
+    100% { color: #ff33ff; text-shadow: 0 0 8px #ff33ff; }
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: orange;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 0 15px orange;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: red;
+    color: white;
+    box-shadow: 0 0 15px red;
+}
+</style>
+</head>
+<body>
+
+<div class="menu-icon" onclick="openNav()">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<div id="mySidebar" class="sidebar">
+    <div class="sidebar-header">
+        <img src="https://cdn.discordapp.com/attachments/1502245812669911123/1508797553045409822/file_0000000073e072088f5c6643f042e8b8.png?ex=6a1a2478&is=6a18d2f8&hm=6147184842b06d3ec5e85c5eab7aea372e9dd6174c5da08725ff4b71ec0d933e&" class="sidebar-logo">
+        <div class="sidebar-title">MINI MC</div>
+        <span class="close-btn" onclick="closeNav()">&times;</span>
+    </div>
+    <a href="index.html" class="menu-link">Home</a>
+    <a href="ip.html" class="menu-link">Server IP</a>
+    <a href="https://discord.gg/M9KGMpu7zQ" target="_blank" class="menu-link">Discord</a>
+    <a href="#" class="menu-link">Store</a>
+    <a href="rules.html" class="menu-link">Rules</a>
+</div>
+
+<div class="rules-container">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <div class="rules-title">SERVER RULES</div>
+    
+    <ul class="rules-list">
+        <li>1. Respect all members and staff.</li>
+        <li>2. No harassment, bullying, or hate speech.</li>
+        <li>3. Do not spam messages, emojis, or reactions.</li>
+        <li>4. No NSFW or inappropriate content.</li>
+        <li>5. Use channels for their correct purpose.</li>
+        <li>6. No excessive CAPS LOCK.</li>
+        <li>7. Avoid toxic behavior and unnecessary drama.</li>
+        <li>8. Do not advertise without permission.</li>
+        <li>9. No self-promotion in general chats.</li>
+        <li>10. Respect everyone’s opinions.</li>
+        <li>11. Do not impersonate staff or members.</li>
+        <li>12. No sharing personal information.</li>
+        <li>13. Keep conversations friendly and safe.</li>
+        <li>14. No offensive usernames or profile pictures.</li>
+        <li>15. Do not bypass punishments using alt accounts.</li>
+        <li>16. Listen to moderators and admins.</li>
+        <li>17. No racism, sexism, or discrimination.</li>
+        <li>18. Do not flood voice channels with noise.</li>
+        <li>19. Use appropriate language.</li>
+        <li>20. No trolling or baiting members.</li>
+        <li>21. Do not send malicious links or files.</li>
+        <li>22. No scamming or phishing attempts.</li>
+        <li>23. Respect privacy in DMs and chats.</li>
+        <li>24. Do not beg for roles or permissions.</li>
+        <li>25. Keep memes in meme channels only.</li>
+        <li>26. No political or religious fights.</li>
+        <li>27. Avoid repeated arguments in chat.</li>
+        <li>28. Do not abuse bots or commands.</li>
+        <li>29. No fake giveaways or fake announcements.</li>
+        <li>30. English only unless allowed in specific channels.</li>
+        <li>31. Stay active and positive.</li>
+        <li>32. No disturbing or shocking content.</li>
+        <li>33. Use spoilers when necessary.</li>
+        <li>34. Do not leak private server information.</li>
+        <li>35. Avoid mic spamming in VC.</li>
+        <li>36. No inappropriate nicknames.</li>
+        <li>37. Respect server events and activities.</li>
+        <li>38. Do not ping everyone without permission.</li>
+        <li>39. No unnecessary tagging of staff.</li>
+        <li>40. Keep profile bios appropriate.</li>
+        <li>41. No cheating discussions if gaming-related.</li>
+        <li>42. Report rule breakers to staff.</li>
+        <li>43. Do not start unnecessary conflicts.</li>
+        <li>44. Respect all age groups.</li>
+        <li>45. Avoid off-topic discussions in important channels.</li>
+        <li>46. No threatening or violent behavior.</li>
+        <li>47. Follow Discord Terms of Service.</li>
+        <li>48. Staff decisions are final.</li>
+        <li>49. Breaking rules may result in warnings, mute, kick, or ban.</li>
+        <li>50. Most importantly, have fun and enjoy the server!</li>
+    </ul>
+</div>
+
+<script>
+function openNav() {
+    document.getElementById("mySidebar").style.width = "260px";
+}
+
+function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+}
+</script>
+
+</body>
+</html>
+
